@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evergreen Studio | Thoughtful Web Design</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ee;
+      --card: #ffffff;
+      --ink: #24302f;
+      --muted: #66706d;
+      --accent: #2f7d6b;
+      --accent-soft: #dff0eb;
+      --line: #e5ded2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(47, 125, 107, 0.18), transparent 32rem),
+        linear-gradient(180deg, #fffaf2 0%, var(--bg) 48%, #eef4f1 100%);
+    }
+
+    header,
+    main,
+    footer {
+      width: min(72rem, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 2rem 0 1rem;
+    }
+
+    .site-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .site-name::before {
+      content: "";
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 0.45rem var(--accent-soft);
+    }
+
+    .hero {
+      display: grid;
+      gap: 1.5rem;
+      padding: clamp(2.5rem, 7vw, 5.5rem) 0;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(3rem, 10vw, 6.75rem);
+      letter-spacing: -0.07em;
+    }
+
+    .hero p {
+      max-width: 42rem;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+      gap: 1rem;
+      padding-bottom: 4rem;
+    }
+
+    section {
+      border: 1px solid var(--line);
+      border-radius: 1.5rem;
+      padding: clamp(1.25rem, 3vw, 2rem);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 1.25rem 3.75rem rgba(36, 48, 47, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      letter-spacing: -0.035em;
+    }
+
+    section p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    ul {
+      display: grid;
+      gap: 0.8rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1.8rem;
+      color: var(--muted);
+    }
+
+    li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .callout {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .callout p {
+      max-width: 45rem;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.65rem 1rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.5rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="site-name">Evergreen Studio</p>
+  </header>
+
+  <main>
+    <article class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Simple pages, lasting impressions</p>
+      <h1 id="page-title">Design that feels calm and clear.</h1>
+      <p>Evergreen Studio creates focused web experiences with accessible structure, thoughtful spacing, and typography that makes every message easier to understand.</p>
+    </article>
+
+    <div class="content-grid">
+      <section aria-labelledby="intro-heading">
+        <h2 id="intro-heading">Introduction</h2>
+        <p>This single-page concept demonstrates how plain HTML and a small amount of embedded CSS can produce a polished, readable, and responsive layout without external dependencies.</p>
+      </section>
+
+      <section aria-labelledby="features-heading">
+        <h2 id="features-heading">Features</h2>
+        <ul>
+          <li>Semantic landmarks for clear page structure and assistive technology support.</li>
+          <li>Responsive cards that adapt gracefully from mobile screens to wide displays.</li>
+          <li>Readable color contrast, generous spacing, and comfortable line lengths.</li>
+        </ul>
+      </section>
+
+      <section class="callout" aria-labelledby="promise-heading">
+        <div>
+          <h2 id="promise-heading">Built to be approachable</h2>
+          <p>Every element is intentionally placed so the page remains easy to scan, pleasant to read, and simple to maintain.</p>
+        </div>
+        <span class="badge">Valid HTML</span>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Evergreen Studio. Crafted with semantic HTML and embedded CSS.</p>
+  </footer>
+</body>
+</html>
