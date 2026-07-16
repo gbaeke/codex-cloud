@@ -196,6 +196,22 @@
       font-weight: 700;
     }
 
+    .weather-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    input {
+      width: min(100%, 16rem);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      color: var(--ink);
+      font: inherit;
+    }
+
     footer {
       border-top: 1px solid var(--line);
       padding: 1.5rem 0 2rem;
@@ -238,6 +254,17 @@
         <p class="api-status" id="api-status" aria-live="polite">API status will appear here.</p>
       </section>
 
+      <section class="api-card" aria-labelledby="weather-heading">
+        <h2 id="weather-heading">Weather lookup</h2>
+        <p>Enter a city to fetch current conditions from Open-Meteo.</p>
+        <div class="weather-form">
+          <label for="weather-city">City</label>
+          <input id="weather-city" type="text" placeholder="Seattle" autocomplete="address-level2">
+          <button type="button" id="weather-button">Get weather</button>
+        </div>
+        <p class="api-status" id="weather-status" aria-live="polite">Weather results will appear here.</p>
+      </section>
+
       <section class="callout" aria-labelledby="promise-heading">
         <div>
           <h2 id="promise-heading">Built to be approachable</h2>
@@ -255,6 +282,9 @@
   <script>
     const apiButton = document.querySelector("#api-button");
     const apiStatus = document.querySelector("#api-status");
+    const weatherButton = document.querySelector("#weather-button");
+    const weatherCity = document.querySelector("#weather-city");
+    const weatherStatus = document.querySelector("#weather-status");
 
     apiButton.addEventListener("click", async () => {
       apiStatus.textContent = "Checking server...";
@@ -269,6 +299,27 @@
         apiStatus.textContent = `${data.message} (${data.timestamp})`;
       } catch (error) {
         apiStatus.textContent = "Unable to reach the API.";
+      }
+    });
+
+    weatherButton.addEventListener("click", async () => {
+      const city = weatherCity.value.trim();
+      weatherStatus.textContent = city ? "Fetching weather..." : "Please enter a city.";
+      if (!city) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || `Request failed: ${response.status}`);
+        }
+
+        const place = [data.city, data.admin1, data.country].filter(Boolean).join(", ");
+        weatherStatus.textContent = `${place}: ${data.temperature}${data.temperatureUnit}, humidity ${data.humidity}${data.humidityUnit}, wind ${data.windSpeed} ${data.windSpeedUnit}.`;
+      } catch (error) {
+        weatherStatus.textContent = error.message || "Unable to fetch weather.";
       }
     });
   </script>
