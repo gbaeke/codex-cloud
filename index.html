@@ -169,6 +169,33 @@
       font-weight: 800;
     }
 
+    .api-card {
+      display: grid;
+      gap: 1rem;
+    }
+
+    button {
+      width: fit-content;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.75rem 1.1rem;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background: #256556;
+    }
+
+    .api-status {
+      min-height: 1.6rem;
+      font-weight: 700;
+    }
+
     footer {
       border-top: 1px solid var(--line);
       padding: 1.5rem 0 2rem;
@@ -204,6 +231,13 @@
         </ul>
       </section>
 
+      <section class="api-card" aria-labelledby="api-heading">
+        <h2 id="api-heading">Server check</h2>
+        <p>Click the button to fetch a small JSON response from the Python server.</p>
+        <button type="button" id="api-button">Check API</button>
+        <p class="api-status" id="api-status" aria-live="polite">API status will appear here.</p>
+      </section>
+
       <section class="callout" aria-labelledby="promise-heading">
         <div>
           <h2 id="promise-heading">Built to be approachable</h2>
@@ -217,5 +251,26 @@
   <footer>
     <p>&copy; 2026 Evergreen Studio. Crafted with semantic HTML and embedded CSS.</p>
   </footer>
+
+  <script>
+    const apiButton = document.querySelector("#api-button");
+    const apiStatus = document.querySelector("#api-status");
+
+    apiButton.addEventListener("click", async () => {
+      apiStatus.textContent = "Checking server...";
+
+      try {
+        const response = await fetch("/api/status");
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        apiStatus.textContent = `${data.message} (${data.timestamp})`;
+      } catch (error) {
+        apiStatus.textContent = "Unable to reach the API.";
+      }
+    });
+  </script>
 </body>
 </html>
