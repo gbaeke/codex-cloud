@@ -1,6 +1,16 @@
-# Evergreen Studio
+# Pink Cookie Pop
 
-A small static HTML page served by Python's built-in `http.server`.
+A lightweight browser-based Cookie Clicker style game with a cohesive pink theme. The site is a single static HTML page served by Python's built-in `http.server`.
+
+## Features
+
+- Landing page hero with basic game instructions.
+- Large accessible cookie button and visible score counters.
+- Click upgrade that increases cookies earned per click.
+- Passive upgrade that adds cookies every second.
+- Reset button for starting over.
+- Minimal `localStorage` persistence for score and upgrade counts.
+- Responsive, dependency-free HTML, CSS, and JavaScript.
 
 ## Running locally
 
@@ -8,10 +18,4 @@ A small static HTML page served by Python's built-in `http.server`.
 python3 server.py
 ```
 
-Open <http://127.0.0.1:8000> in a browser. The existing `/api/status` endpoint returns a simple server health response.
-
-## Weather lookup
-
-The page includes a weather lookup that calls `/api/weather?city=<city name>`. The server geocodes the city and fetches current conditions from [Open-Meteo](https://open-meteo.com/), a free weather API that does not require an API key for this use case.
-
-No additional configuration is required. If you switch to a weather provider that needs a key, read it from an environment variable and return a clear JSON error when it is not set.
+Open <http://127.0.0.1:8000> in a browser.
